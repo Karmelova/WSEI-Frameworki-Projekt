@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-//import { Container } from "@mui/material";
+import { Container } from "@mui/material";
 import ErrorBoundary from "./common/ErrorBoundary";
 //import Home from "./routes/Home";
 import Navbar from "./common/Navbar";
@@ -14,6 +14,11 @@ export const App = () => {
         <ThemeProvider theme={Theme}>
           <Navbar />
 
+          
+          <Container>
+            <Routes>
+              <Route path="/"></Route>
+            </Routes>
           <>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ac
             scelerisque nunc. Integer suscipit tortor non sapien maximus
@@ -864,6 +869,7 @@ export const App = () => {
             dolor. Cras venenatis dolor nunc. Nulla eu erat vel elit tempor
             vestibulum. Etiam gravida volutpat ex, id vestibulum nisi auctor id.
           </>
+          </Container>
         </ThemeProvider>
       </BrowserRouter>
     </ErrorBoundary>
