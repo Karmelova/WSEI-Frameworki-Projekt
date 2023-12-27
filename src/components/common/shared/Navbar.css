@@ -1,13 +1,13 @@
 @font-face {
     font-family: 'Olga-Regular';
-    src: url('../../../public/fonts/Olga-Regular/Olga-Regular.ttf') format('truetype'),
-         url('../../../public/fonts/Olga-Regular/Olga-Regular.woff') format('woff'),
-         url('../../../public/fonts/Olga-Regular/Olga-Regular.svg') format('svg');
+    src: url('https://karmelova.github.io/WSEI-Frameworki-Projekt/public/fonts/Olga-Regular/Olga-Regular.ttf.eot') format('truetype'),
+         url('https://karmelova.github.io/WSEI-Frameworki-Projekt/public/fonts/Olga-Regular/Olga-Regular.ttf.woff') format('woff'),
+         url('https://karmelova.github.io/WSEI-Frameworki-Projekt/public/fonts/Olga-Regular/Olga-Regular.ttf.svg') format('svg');
     font-weight: normal;
     font-style: normal;
   }
   
-  body {
+  a {
     font-family: 'Olga-Regular', sans-serif;
   }
   

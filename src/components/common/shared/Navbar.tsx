@@ -12,10 +12,22 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
-import  './Navbar.css'
+import  './Navbar.css';
+import { styled } from '@mui/system';
+
 
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+
+const CustomTypography = styled(Typography)`
+  font-family: 'Olga-Regular', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.3rem;
+  color: inherit;
+  text-decoration: none;
+  font-size: 1.5rem;
+  color: black;
+`as typeof Typography;
 
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
@@ -36,28 +48,25 @@ function Navbar() {
     setAnchorElUser(null);
   };
 
+
+  
   return (
     <AppBar position="static" color="primary">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
-          <Typography
+          <CustomTypography
             variant="h6"
             noWrap
             component="a"
             href="./react-app"
             sx={{
               mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.2rem',
-              color: 'inherit',
-              textDecoration: 'none',
+              display: { xs: 'none', md: 'flex' }
             }}
           >
             PICTUREPULSE
-          </Typography>
+          </CustomTypography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
