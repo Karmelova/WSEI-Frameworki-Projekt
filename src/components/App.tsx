@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Container } from "@mui/material";
+//import { Container } from "@mui/material";
 import ErrorBoundary from "./common/ErrorBoundary";
-import Home from "./routes/Home";
+//import Home from "./routes/Home";
 import Navbar from "./common/Navbar";
 import { ThemeProvider } from "@mui/material/styles";
 import Theme from "./common/Theme";
