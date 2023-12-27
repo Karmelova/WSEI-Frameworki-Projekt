@@ -1,4 +1,5 @@
 import * as React from "react";
+import { styled, alpha } from '@mui/material/styles';
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -11,8 +12,11 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import { styled } from "@mui/system";
+import InputBase from '@mui/material/InputBase';
+import SearchIcon from '@mui/icons-material/Search';
+
 import { ReactSVG } from "react-svg";
+
 import "./Navbar.css";
 
 const pages = ["Products", "Pricing", "Blog"];
@@ -26,7 +30,47 @@ const CustomTypography = styled(Typography)`
   text-decoration: none;
   font-size: 1.5rem;
 ` as typeof Typography;
+const Search = styled('div')(({ theme }) => ({
+  position: 'relative',
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  '&:hover': {
+    backgroundColor: alpha(theme.palette.common.white, 0.25),
+  },
+  marginLeft: 0,
+  width: '100%',
+  [theme.breakpoints.up('sm')]: {
+    marginLeft: theme.spacing(1),
+    width: 'auto',
+  },
+}));
 
+const SearchIconWrapper = styled('div')(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+  height: '100%',
+  position: 'absolute',
+  pointerEvents: 'none',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+}));
+
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: 'inherit',
+  width: '100%',
+  '& .MuiInputBase-input': {
+    padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    transition: theme.transitions.create('width'),
+    [theme.breakpoints.up('sm')]: {
+      width: '12ch',
+      '&:focus': {
+        width: '20ch',
+      },
+    },
+  },
+}));
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
@@ -54,21 +98,18 @@ function Navbar() {
     <AppBar position="sticky" color="primary">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-        <ReactSVG
-        beforeInjection={(svg) => {
-          svg.classList.add('logo')
-        }}
-          desc="Logo"
-          evalScripts="always"
-          fallback={() => <span>Error!</span>}
-          loading={() => <span>Loading</span>}
-          onError={(error) => {
-            console.error(error);
-          }}
-          renumerateIRIElements={false}
-          src="https://karmelova.github.io/WSEI-Frameworki-Projekt/public/icons/triangular-logo-svgrepo-com.svg"
-          wrapper="span"
-        />
+          <ReactSVG
+            beforeInjection={(svg) => {
+              svg.classList.add("logo");
+            }}
+            desc="Logo"
+            evalScripts="always"
+            onError={(error) => {
+              console.error(error);
+            }}
+            renumerateIRIElements={false}
+            src="https://karmelova.github.io/WSEI-Frameworki-Projekt/public/icons/triangular-logo-svgrepo-com.svg"
+          />
           <CustomTypography
             variant="h6"
             noWrap
@@ -81,7 +122,15 @@ function Navbar() {
           >
             PICTUREPULSE
           </CustomTypography>
-
+          <Search sx={{ flexGrow: {sm: 8, md: 2, xl:1}, display:  "flex" }}>
+            <SearchIconWrapper>
+              <SearchIcon />
+            </SearchIconWrapper>
+            <StyledInputBase
+              placeholder="Search…"
+              inputProps={{ 'aria-label': 'search' }}
+            />
+          </Search>
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
@@ -98,12 +147,12 @@ function Navbar() {
               anchorEl={anchorElNav}
               anchorOrigin={{
                 vertical: "bottom",
-                horizontal: "left",
+                horizontal: "center",
               }}
               keepMounted
               transformOrigin={{
                 vertical: "top",
-                horizontal: "left",
+                horizontal: "center",
               }}
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
@@ -118,7 +167,18 @@ function Navbar() {
               ))}
             </Menu>
           </Box>
-          
+          <Box sx={{ flexGrow: 3, display: { xs: "none", md: "flex" },justifyContent: "space-around"}}>
+            {pages.map((page) => (
+              <Button
+                key={page}
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: "white", display: "block" }}
+              >
+                {page}
+              </Button>
+            ))}
+          </Box>
+
           <Typography
             variant="h5"
             noWrap
@@ -134,21 +194,9 @@ function Navbar() {
               color: "inherit",
               textDecoration: "none",
             }}
-          >
-          </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
-                {page}
-              </Button>
-            ))}
-          </Box>
+          ></Typography>
 
-          <Box sx={{ flexGrow: 0 }}>
+          <Box sx={{ flexGrow: 0, flexShrink: 3 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
@@ -177,6 +225,7 @@ function Navbar() {
               ))}
             </Menu>
           </Box>
+          
         </Toolbar>
       </Container>
     </AppBar>
