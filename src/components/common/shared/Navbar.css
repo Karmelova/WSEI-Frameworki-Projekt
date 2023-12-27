@@ -1,0 +1,13 @@
+@font-face {
+    font-family: 'Olga-Regular';
+    src: url('../../../public/fonts/Olga-Regular/Olga-Regular.ttf') format('truetype'),
+         url('../../../public/fonts/Olga-Regular/Olga-Regular.woff') format('woff'),
+         url('../../../public/fonts/Olga-Regular/Olga-Regular.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  body {
+    font-family: 'Olga-Regular', sans-serif;
+  }
+  
