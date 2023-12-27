@@ -10,7 +10,7 @@ import Theme from "./common/Theme";
 export const App = () => {
   return (
     //<ErrorBoundary>
-      <BrowserRouter basename="/react-app">
+      <BrowserRouter>
         <ThemeProvider theme={Theme}>
           <Navbar />
 
