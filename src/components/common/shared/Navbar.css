@@ -10,4 +10,10 @@
   a {
     font-family: 'Olga-Regular', sans-serif;
   }
+  .logo{
+    height: 2em;
+    width: 40px;
+    margin-right: 10px;
+    fill: red;
+  }
   
