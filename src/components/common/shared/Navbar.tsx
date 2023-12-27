@@ -66,7 +66,7 @@ function Navbar() {
             console.error(error);
           }}
           renumerateIRIElements={false}
-          src="https://karmelova.github.io/WSEI-Frameworki-Projekt/public/icons/triangular-logo-svgrepo-com.svg"
+          src="https://karmelova.github.io/WSEI-Frameworki-Projekt/public/icons/triangular-logo.svg"
           wrapper="span"
         />
           <CustomTypography
