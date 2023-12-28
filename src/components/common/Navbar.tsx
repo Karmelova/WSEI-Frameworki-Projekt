@@ -1,5 +1,5 @@
 import * as React from "react";
-import { styled, alpha } from '@mui/material/styles';
+import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -12,15 +12,15 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import InputBase from '@mui/material/InputBase';
-import SearchIcon from '@mui/icons-material/Search';
+import InputBase from "@mui/material/InputBase";
+import SearchIcon from "@mui/icons-material/Search";
 
 import { ReactSVG } from "react-svg";
 
 import "./Navbar.css";
 
-const pages = ["Products", "Pricing", "Blog"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const pages: string[] = ["Home", "Pricing", "Blog"];
+const settings: string[] = ["Profile", "Account", "Dashboard", "Logout"];
 
 const CustomTypography = styled(Typography)`
   font-family: "Olga-Regular", sans-serif;
@@ -30,43 +30,43 @@ const CustomTypography = styled(Typography)`
   text-decoration: none;
   font-size: 1.5rem;
 ` as typeof Typography;
-const Search = styled('div')(({ theme }) => ({
-  position: 'relative',
+const Search = styled("div")(({ theme }) => ({
+  position: "relative",
   borderRadius: theme.shape.borderRadius,
   backgroundColor: alpha(theme.palette.common.white, 0.15),
-  '&:hover': {
+  "&:hover": {
     backgroundColor: alpha(theme.palette.common.white, 0.25),
   },
   marginLeft: 0,
-  width: '100%',
-  [theme.breakpoints.up('sm')]: {
+  width: "100%",
+  [theme.breakpoints.up("sm")]: {
     marginLeft: theme.spacing(1),
-    width: 'auto',
+    width: "auto",
   },
 }));
 
-const SearchIconWrapper = styled('div')(({ theme }) => ({
+const SearchIconWrapper = styled("div")(({ theme }) => ({
   padding: theme.spacing(0, 2),
-  height: '100%',
-  position: 'absolute',
-  pointerEvents: 'none',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
+  height: "100%",
+  position: "absolute",
+  pointerEvents: "none",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: 'inherit',
-  width: '100%',
-  '& .MuiInputBase-input': {
+  color: "inherit",
+  width: "100%",
+  "& .MuiInputBase-input": {
     padding: theme.spacing(1, 1, 1, 0),
     // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create('width'),
-    [theme.breakpoints.up('sm')]: {
-      width: '12ch',
-      '&:focus': {
-        width: '20ch',
+    transition: theme.transitions.create("width"),
+    [theme.breakpoints.up("sm")]: {
+      width: "12ch",
+      "&:focus": {
+        width: "20ch",
       },
     },
   },
@@ -86,12 +86,19 @@ function Navbar() {
     setAnchorElUser(event.currentTarget);
   };
 
-  const handleCloseNavMenu = () => {
+  const handleCloseNavMenu = (page: string) => {
     setAnchorElNav(null);
+    if (pages.includes(page) ) {
+      window.location.href = `/${page}`;
+    }
+
   };
 
-  const handleCloseUserMenu = () => {
+  const handleCloseUserMenu = (setting: string ) => {
     setAnchorElUser(null);
+    if(settings.includes(setting)){
+      window.location.href = `/${setting}`;
+    }
   };
 
   return (
@@ -114,7 +121,7 @@ function Navbar() {
             variant="h6"
             noWrap
             component="a"
-            href="./react-app"
+            href="/"
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -122,13 +129,13 @@ function Navbar() {
           >
             PICTUREPULSE
           </CustomTypography>
-          <Search sx={{ flexGrow: {sm: 8, md: 2, xl:1}, display:  "flex" }}>
+          <Search sx={{ flexGrow: { sm: 8, md: 2, xl: 1 }, display: "flex" }}>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
               placeholder="Search…"
-              inputProps={{ 'aria-label': 'search' }}
+              inputProps={{ "aria-label": "search" }}
             />
           </Search>
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -160,18 +167,24 @@ function Navbar() {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
+              {pages.map((page: string) => (
+                <MenuItem key={page} onClick={() => handleCloseNavMenu(page)}>
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
-          <Box sx={{ flexGrow: 3, display: { xs: "none", md: "flex" },justifyContent: "space-around"}}>
-            {pages.map((page) => (
+          <Box
+            sx={{
+              flexGrow: 3,
+              display: { xs: "none", md: "flex" },
+              justifyContent: "space-around",
+            }}
+          >
+            {pages.map((page: string) => (
               <Button
                 key={page}
-                onClick={handleCloseNavMenu}
+                onClick={() => handleCloseNavMenu(page)}
                 sx={{ my: 2, color: "white", display: "block" }}
               >
                 {page}
@@ -218,14 +231,13 @@ function Navbar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+              {settings.map((setting: string) => (
+                <MenuItem key={setting} onClick={() => handleCloseUserMenu(setting)}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
-          
         </Toolbar>
       </Container>
     </AppBar>
