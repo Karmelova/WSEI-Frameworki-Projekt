@@ -1,4 +1,3 @@
-import { useGetAlbums } from "../../api/albums/useGetAlbums";
 import { useGetUsers } from "../../api/users/useGetUsers";
 import { Card } from "../common/Card";
 import { Link, useNavigate } from "react-router-dom";
@@ -6,14 +5,13 @@ import { Box, Button, CircularProgress } from "@mui/material";
 import "./Posts.css";
 
 
-export default function Albums() {
-  const albums = useGetAlbums();
+export default function Users() {
   const users = useGetUsers();
   const navigate = useNavigate();
 
 
   
-  if (!albums) {
+  if (!users) {
     return (
         <Box style={{display:"flex", justifyContent:"center", alignItems: "center"}}>
           <CircularProgress color="secondary" />
@@ -29,15 +27,15 @@ export default function Albums() {
   }
   return (
     <div className="posts">
-      {albums.map((album) =>{
-        const user = users?.find(user => Number(user.id) === Number(album.userId));
+      {users.map((user) =>{
         return(
         <Card
-          title={album.title}
-          albumId={album.id}
-          userId={album.userId}
-          name={user?.name}
-          userName={user?.username}
+          name={user.name}
+          userName={user.username}
+          companyName={user.company.name}
+          email={user.email}
+          website={user.website}
+          userId={Number(user.id)}
         >
         </Card>
       )})}

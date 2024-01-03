@@ -8,6 +8,9 @@ import CardActions from "@mui/material/CardActions";
 import Collapse from "@mui/material/Collapse";
 import Avatar, { AvatarClassKey } from "@mui/material/Avatar";
 import IconButton, { IconButtonProps } from "@mui/material/IconButton";
+import EmailIcon from "@mui/icons-material/Email";
+import BusinessIcon from "@mui/icons-material/Business";
+import LanguageIcon from "@mui/icons-material/Language";
 import Typography from "@mui/material/Typography";
 import PersonIcon from "@mui/icons-material/Person";
 import PhotoLibraryIcon from "@mui/icons-material/PhotoLibrary";
@@ -24,6 +27,9 @@ interface Props {
   name?: string;
   userName?: string;
   albumId?: number;
+  website?: string;
+  companyName?: string;
+  email?: string;
 }
 
 export function Card({
@@ -35,9 +41,12 @@ export function Card({
   name,
   userName,
   albumId,
+  email,
+  companyName,
+  website,
 }: Props) {
   const navigate = useNavigate();
-  if (description == undefined) {
+  if (description == undefined && !email) {
     return (
       <MyCard>
         <Link className="card-link" to={`/albums/${albumId}`}>
@@ -50,12 +59,73 @@ export function Card({
             title={title}
           />
         </Link>
-        <CardContent sx={{paddingTop: 0}}>
+        <CardContent sx={{ paddingTop: 0 }}>
+          <Link className="card-link" to={`/user/${userId}`}>
+            <Typography variant="caption" color="text.secondary">
+              made by: @{userName}
+            </Typography>
+          </Link>
+        </CardContent>
+        <CardActions>{children}</CardActions>
+      </MyCard>
+    );
+  }
+  if (description == undefined) {
+    return (
+      <MyCard>
         <Link className="card-link" to={`/user/${userId}`}>
-              <Typography variant="caption" color="text.secondary">
-                made by: @{userName}
+          <CardHeader
+            avatar={
+              <Avatar aria-label="recipe">
+                <PersonIcon></PersonIcon>
+              </Avatar>
+            }
+            title={name}
+            subheader={"@" + userName}
+          />
+        </Link>
+        <CardContent>
+          {email && (
+            <Link className="card-link" to={`/user/${userId}`}>
+              <Typography
+                variant="body2"
+                gutterBottom
+                sx={{ display: "flex", alignItems: "center", gap: 1 }}
+              >
+                <EmailIcon />
+                {email}
               </Typography>
             </Link>
+          )}
+          {companyName && (
+            <Link className="card-link" to={`/user/${userId}`}>
+              <Typography
+                variant="body2"
+                gutterBottom
+                sx={{ display: "flex", alignItems: "center", gap: 1 }}
+              >
+                <BusinessIcon />
+                {companyName}
+              </Typography>
+            </Link>
+          )}
+          {website && (
+            <a
+              className="card-link"
+              href={"https://www." + website}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Typography
+                variant="body2"
+                gutterBottom
+                sx={{ display: "flex", alignItems: "center", gap: 1 }}
+              >
+                <LanguageIcon />
+                {website}
+              </Typography>
+            </a>
+          )}
         </CardContent>
         <CardActions>{children}</CardActions>
       </MyCard>

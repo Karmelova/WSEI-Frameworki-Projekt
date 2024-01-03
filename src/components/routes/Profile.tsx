@@ -3,7 +3,7 @@ import { useGetUser } from "../../api/users/useGetUser";
 import UserCard from "../common/UserCard";
 import { Button, CircularProgress } from "@mui/material";
 
-export default function User() {
+export default function Profile() {
   const { id } = useParams();
   const user = useGetUser(id || "");
 
