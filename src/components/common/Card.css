@@ -1,0 +1,4 @@
+a.card-link, a.card-link:visited, a.card-link:hover{
+    text-decoration: none;
+    color: black;
+}

@@ -34,8 +34,8 @@ export default function UserCard({
             {avatar}
           </Avatar>
         }
-        title={name}
-        subheader={description}
+        name={name}
+        subname={description}
       />
       {website && (
         <CardContent>
