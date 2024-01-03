@@ -2,8 +2,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Container } from "@mui/material";
 import ErrorBoundary from "./common/ErrorBoundary";
 import Posts from "./routes/Posts";
+import Albums from "./routes/Albums";
 import Home from "./routes/Home";
-import Photos from "./routes/Photos"
 import Navbar from "./common/Navbar";
 import { ThemeProvider } from "@mui/material/styles";
 import Theme from "./common/Theme";
@@ -27,7 +27,7 @@ export const App = () => {
             <Routes>
               <Route path="/" element={<Home />}></Route>
               <Route path="/Posts" element={<Posts />}></Route>
-              <Route path="/Photos" element={<Photos />}></Route>
+              <Route path="/Albums" element={<Albums />}></Route>
               <Route path="/users/:id" element={<Profile />}></Route>
               <Route path="*" element={<NotFound />} />
             </Routes>

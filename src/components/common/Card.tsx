@@ -10,6 +10,7 @@ import Avatar, { AvatarClassKey } from "@mui/material/Avatar";
 import IconButton, { IconButtonProps } from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import PersonIcon from "@mui/icons-material/Person";
+import PhotoLibraryIcon from "@mui/icons-material/PhotoLibrary";
 import { Link, useNavigate } from "react-router-dom";
 import "./Card.css";
 
@@ -22,6 +23,7 @@ interface Props {
   userId?: number;
   name?: string;
   userName?: string;
+  albumId?: number;
 }
 
 export function Card({
@@ -32,25 +34,28 @@ export function Card({
   userId,
   name,
   userName,
+  albumId,
 }: Props) {
   const navigate = useNavigate();
-  if (userId == undefined) {
+  if (description == undefined) {
     return (
       <MyCard>
-        <Link className="card-link" to={`/user/${userId}`}></Link>
-        {image && (
-          <CardMedia sx={{ height: 140 }} image={image} title="image" />
-        )}
-        {/* jesli image to wykonaj to co po && */}
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            {title}
-          </Typography>
-          {description && (
-            <Typography variant="body2" color="text.secondary">
-              {description}
-            </Typography>
-          )}
+        <Link className="card-link" to={`/albums/${albumId}`}>
+          <CardHeader
+            avatar={
+              <Avatar aria-label="recipe">
+                <PhotoLibraryIcon></PhotoLibraryIcon>
+              </Avatar>
+            }
+            title={title}
+          />
+        </Link>
+        <CardContent sx={{paddingTop: 0}}>
+        <Link className="card-link" to={`/user/${userId}`}>
+              <Typography variant="caption" color="text.secondary">
+                made by: @{userName}
+              </Typography>
+            </Link>
         </CardContent>
         <CardActions>{children}</CardActions>
       </MyCard>
