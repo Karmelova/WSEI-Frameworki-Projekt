@@ -5,7 +5,7 @@ import Home from "./routes/Home";
 import Navbar from "./common/Navbar";
 import { ThemeProvider } from "@mui/material/styles";
 import Theme from "./common/Theme";
-//import Profile from './routes/Profile';
+import Profile from './routes/Profile';
 
 export const App = () => {
   return (
@@ -18,6 +18,7 @@ export const App = () => {
           <Container>
             <Routes>
               <Route path="/Home" element={<Home />}></Route>
+              <Route path="/users/:id" element={<Profile />}></Route>
             </Routes>
           
           </Container>
