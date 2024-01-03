@@ -1,0 +1,20 @@
+.posts {
+    display: grid;
+    grid-template-columns: 350px 350px 350px;
+    gap: 2em;
+    max-width: 800px;
+    justify-content: center;
+    margin: auto;
+  }
+  
+  @media (max-width: 900px) {
+    .posts {
+      grid-template-columns: auto;
+    }
+  }
+  @media (min-width: 900px) and (max-width: 1200px){
+    .posts {
+        grid-template-columns: 350px 350px;
+      }
+  }
+  

@@ -19,7 +19,7 @@ import { ReactSVG } from "react-svg";
 
 import "./Navbar.css";
 
-const pages: string[] = ["Home", "Pricing", "Blog"];
+const pages: string[] = ["Posts", "Albums", "Users"];
 const settings: string[] = ["Profile", "Account", "Dashboard", "Logout"];
 
 const CustomTypography = styled(Typography)`
@@ -127,7 +127,7 @@ function Navbar() {
               display: { xs: "none", md: "flex" },
             }}
           >
-            PICTUREPULSE
+            SocialHub
           </CustomTypography>
           <Search sx={{ flexGrow: { sm: 8, md: 2, xl: 1 }, display: "flex" }}>
             <SearchIconWrapper>

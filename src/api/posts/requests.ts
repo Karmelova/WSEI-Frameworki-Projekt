@@ -3,13 +3,15 @@ export interface Post {
   id: number;
   title: string;
   body: string;
+  url: string;
 }
 
 export async function getPosts() {
   const respone = await fetch(`https://jsonplaceholder.typicode.com/posts`);
   const data: Post[] = await respone.json();
   const posts = data.map((post) => ({
-    ...post
+    ...post,
+    url: `https://picsum.photos/id/${post.id + 25}/600/200`,
   })); //destrukcja
   return posts;
 }
