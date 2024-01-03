@@ -21,8 +21,6 @@ export const App = () => {
       <BrowserRouter>
         <ThemeProvider theme={Theme}>
           <Navbar />
-
-          
           <Container>
             <div style={ContentMargin}></div>
             <Routes>
