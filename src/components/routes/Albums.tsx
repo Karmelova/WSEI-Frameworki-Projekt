@@ -11,6 +11,17 @@ export default function Albums() {
   const users = useGetUsers();
   const navigate = useNavigate();
 
+interface Album {
+  userId: number;
+  id: number;
+  title: string;
+}
+
+interface User {
+  id: number;
+  name: string;
+  username: string;
+}
 
   
   if (!albums) {

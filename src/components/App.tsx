@@ -30,6 +30,7 @@ export const App = () => {
               <Route path="/Users" element={<Users />}></Route>
               <Route path="/user/:id" element={<Profile />}></Route>
               <Route path="*" element={<NotFound />} />
+              
             </Routes>
             <div style={ContentMargin}></div>
           </Container>
