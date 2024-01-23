@@ -145,7 +145,14 @@ export function Card({
           />
         </Link>
         {image && (
-          <CardMedia sx={{ height: 140 }} image={image} title="image" />
+          <a
+            className="card-link"
+            href={image}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <CardMedia sx={{ height: 140 }} image={image} title="image" />
+          </a>
         )}
         {/* jesli image to wykonaj to co po && */}
         <CardContent>

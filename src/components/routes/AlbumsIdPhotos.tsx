@@ -47,6 +47,8 @@ export default function PhotosByAlbumId() {
             userId={album?.userId}
             name={user?.name}
             userName={user?.username}
+            description=""
+            image={photo.url}
           ></Card>
         );
       })}
