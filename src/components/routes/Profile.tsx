@@ -30,7 +30,7 @@ export default function Profile() {
 
   if (user.id)
     return (
-      <Grid container spacing={2} sx={{background: "rgba(255, 255, 255, 0.5)", backdropFilter: "blur(10px)", border: "1px solid rgba(255, 255, 255, 0.2)", borderRadius: 10, padding: 2}}>
+      <Grid container spacing={2} sx={{background: "rgba(255, 255, 255, 0.5)", backdropFilter: "blur(10px)", border: "1px solid rgba(255, 255, 255, 0.2)", borderRadius: 10, padding: 2, marginLeft: "-8px"}}>
         <Grid
           item
           xs={12}
