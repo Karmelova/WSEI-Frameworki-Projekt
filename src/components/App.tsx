@@ -1,3 +1,4 @@
+import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Container } from "@mui/material";
 import ErrorBoundary from "./common/ErrorBoundary";
@@ -16,6 +17,9 @@ export const App = () => {
   const ContentMargin = {
     height: '2em', // Set the height value as per your requirement
   };
+  useEffect(() => {
+    document.title = 'SocialHub';
+  }, []);
 
   return (
     <ErrorBoundary>
