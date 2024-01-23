@@ -27,7 +27,7 @@ export default function UserCard({
   children,
 }: Props) {
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 345, boxShadow: 22 }}>
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: grey[500] }} aria-label="recipe">

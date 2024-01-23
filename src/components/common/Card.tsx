@@ -48,7 +48,7 @@ export function Card({
   const navigate = useNavigate();
   if (description == undefined && !email) {
     return (
-      <MyCard>
+      <MyCard sx={{ boxShadow: 22 }}>
         <Link className="card-link" to={`/albums/${albumId}`}>
           <CardHeader
             avatar={
@@ -72,7 +72,7 @@ export function Card({
   }
   if (description == undefined) {
     return (
-      <MyCard>
+      <MyCard sx={{ boxShadow: 22 }}>
         <Link className="card-link" to={`/user/${userId}`}>
           <CardHeader
             avatar={
@@ -132,7 +132,7 @@ export function Card({
     );
   } else
     return (
-      <MyCard>
+      <MyCard sx={{ boxShadow: 22 }}>
         <Link className="card-link" to={`/user/${userId}`}>
           <CardHeader
             avatar={

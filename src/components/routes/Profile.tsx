@@ -19,7 +19,8 @@ export default function Profile() {
         avatar={user.name
           .split(" ")
           .map((t) => t[0])
-          .join("")}
+          .join("")
+        }
         website={user.website}
         address={user.address}
       >

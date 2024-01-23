@@ -67,11 +67,10 @@ export default function Home() {
     display: { sm: "block", md: "flex" },
     justifyContent: "center",
     alignItems: "center",
-    textAlign: "center",
-    wordWrap: "break-word",
+    textAlign: "center"
   }}>
       {/* Typography component for the header */}
-      <Typography variant="h4" style={{ wordBreak: "normal" }}>
+      <Typography variant="h4" style={{ wordBreak: "normal", textShadow: "2px 2px 4px white"}}>
         Inspire yourself with photos from people around the world
       </Typography>
       <ImageList variant="quilted" gap={20} cols={4} rowHeight={121}>
