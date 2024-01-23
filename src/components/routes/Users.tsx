@@ -5,6 +5,7 @@ import { Box, Button, CircularProgress } from "@mui/material";
 import "./Posts.css";
 
 
+
 export default function Users() {
   const users = useGetUsers();
   const navigate = useNavigate();

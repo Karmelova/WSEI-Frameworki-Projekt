@@ -37,7 +37,7 @@ export default function PhotosByAlbumId() {
     });
     navigate("/");
   }
-  return (
+  if(photos[0]) return (
     <div className="posts">
       {photos.map((photo) => {
         return (
@@ -54,4 +54,9 @@ export default function PhotosByAlbumId() {
       })}
     </div>
   );
+  else return(
+    <div> 
+      This album does not contain any photos yet
+    </div>
+  )
 }

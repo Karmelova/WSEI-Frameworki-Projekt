@@ -5,10 +5,9 @@ import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
-import Collapse from "@mui/material/Collapse";
-import Avatar, { AvatarClassKey } from "@mui/material/Avatar";
+import Avatar from "@mui/material/Avatar";
 import IconButton, { IconButtonProps } from "@mui/material/IconButton";
-import EmailIcon from "@mui/icons-material/Email";
+import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import BusinessIcon from "@mui/icons-material/Business";
 import LanguageIcon from "@mui/icons-material/Language";
 import Typography from "@mui/material/Typography";
@@ -30,6 +29,12 @@ interface Props {
   website?: string;
   companyName?: string;
   email?: string;
+}
+
+function stringAvatar(name: string) {
+  return {
+    children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
+  };
 }
 
 export function Card({
@@ -92,7 +97,7 @@ export function Card({
                 gutterBottom
                 sx={{ display: "flex", alignItems: "center", gap: 1 }}
               >
-                <EmailIcon />
+                <EmailOutlinedIcon />
                 {email}
               </Typography>
             </Link>
@@ -136,8 +141,7 @@ export function Card({
         <Link className="card-link" to={`/user/${userId}`}>
           <CardHeader
             avatar={
-              <Avatar aria-label="recipe">
-                <PersonIcon></PersonIcon>
+              <Avatar {...stringAvatar(name ? name : ("N A"))} aria-label="recipe">
               </Avatar>
             }
             title={name}

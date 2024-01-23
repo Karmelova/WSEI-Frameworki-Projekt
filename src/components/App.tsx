@@ -26,7 +26,7 @@ export const App = () => {
       <BrowserRouter>
         <ThemeProvider theme={Theme}>
           <Navbar />
-          <Container>
+          <Container >
             <div style={ContentMargin}></div>
             <Routes>
               <Route path="/" element={<Home />}></Route>
