@@ -35,7 +35,7 @@ export default function Users() {
           companyName={user.company.name}
           email={user.email}
           website={user.website}
-          userId={Number(user.id)}
+          userId={user.id}
         >
         </Card>
       )})}

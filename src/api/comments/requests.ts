@@ -12,7 +12,7 @@ export interface Comments {
     return comments;
   }
   
-  export async function getCommentsbyPostId(postId: string) {
+  export async function getCommentsbyPostId(postId: number) {
     const respone = await fetch(
       `https://jsonplaceholder.typicode.com/comments/?postId=${postId}`
     );

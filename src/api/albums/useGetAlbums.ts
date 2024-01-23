@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { Albums, getAlbums } from "./requests";
+import { Album, getAlbums } from "./requests";
 
 export function useGetAlbums() {
-  const [albums, setAlbums] = useState<Albums[]>();
+  const [albums, setAlbums] = useState<Album[]>();
 
   useEffect(()=>{
     getAlbums().then((data) => setAlbums(data));

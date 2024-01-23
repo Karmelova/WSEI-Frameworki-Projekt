@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { Photos, getPhotosById } from "./requests";
+import { Photo, getPhotosByAlbumId } from "./requests";
 
 export function useGetPhotosByAlbumId(albumId: string) {
-  const [photos, setPhotos] = useState<Photos[]>();
+  const [photo, setPhotos] = useState<Photo[]>();
 
   useEffect(()=> {
-    getPhotosById(albumId).then((data) => setPhotos(data));
+    getPhotosByAlbumId(albumId).then((data) => setPhotos(data));
   }, [albumId]);
 
-  return photos;
+  return photo;
 }

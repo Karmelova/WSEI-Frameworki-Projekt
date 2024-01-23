@@ -5,7 +5,7 @@ export interface ToDos {
   completed: boolean;
 }
 
-export async function getToDos(userId: string) {
+export async function getToDos(userId: number) {
   const respone = await fetch(
     `https://jsonplaceholder.typicode.com/todos?userId=${userId}`
   );

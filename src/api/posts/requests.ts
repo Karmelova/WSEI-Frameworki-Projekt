@@ -16,7 +16,7 @@ export async function getPosts() {
   return posts;
 }
 
-export async function getPost(postId: string) {
+export async function getPost(postId: number) {
   const respone = await fetch(
     `https://jsonplaceholder.typicode.com/posts/${postId}`
   );

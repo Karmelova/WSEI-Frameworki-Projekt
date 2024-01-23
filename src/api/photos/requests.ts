@@ -1,4 +1,4 @@
-export interface Photos {
+export interface Photo {
     albumId: number;
     id: number;
     title: string;
@@ -8,21 +8,21 @@ export interface Photos {
   
   export async function getPhoto(id: string) {
     const respone = await fetch(`https://jsonplaceholder.typicode.com/photos/${id}`);
-    const photo: Photos = await respone.json();
+    const photo: Photo = await respone.json();
     return photo;
   }
   
   export async function getPhotos() {
     const respone = await fetch(`https://jsonplaceholder.typicode.com/photos`);
-    const photos: Photos[] = await respone.json();
+    const photos: Photo[] = await respone.json();
     return photos;
   }
   
-  export async function getPhotosById(albumId: string) {
+  export async function getPhotosByAlbumId(albumId: string) {
     const respone = await fetch(
       `https://jsonplaceholder.typicode.com/albums/${albumId}/photos`
     );
-    const photos: Photos[] = await respone.json();
+    const photos: Photo[] = await respone.json();
     return photos;
   }
   

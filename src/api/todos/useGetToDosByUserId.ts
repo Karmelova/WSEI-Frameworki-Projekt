@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import { ToDos, getToDos } from "./requests";
 
-export function useGetToDos(postId: string) {
+export function useGetToDos(postId: number) {
   const [toDos, setToDos] = useState<ToDos[]>();
 
   useEffect(()=> {

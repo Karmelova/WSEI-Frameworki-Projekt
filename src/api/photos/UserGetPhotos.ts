@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { Photos, getPhotos } from "./requests";
+import { Photo, getPhotos } from "./requests";
 
 export function useGetPhotos() {
-  const [photos, setPhotos] = useState<Photos[]>();
+  const [photo, setPhotos] = useState<Photo[]>();
 
   useEffect(()=>{
     getPhotos().then((data) => setPhotos(data));
   }, []);
 
-  return photos;
+  return photo;
 }

@@ -10,19 +10,6 @@ export default function Albums() {
   const albums = useGetAlbums();
   const users = useGetUsers();
   const navigate = useNavigate();
-
-interface Album {
-  userId: number;
-  id: number;
-  title: string;
-}
-
-interface User {
-  id: number;
-  name: string;
-  username: string;
-}
-
   
   if (!albums) {
     return (
@@ -41,7 +28,7 @@ interface User {
   return (
     <div className="posts">
       {albums.map((album) =>{
-        const user = users?.find(user => Number(user.id) === Number(album.userId));
+        const user = users?.find(user => user.id === album.userId);
         return(
         <Card
           title={album.title}

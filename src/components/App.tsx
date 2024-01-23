@@ -9,6 +9,7 @@ import Navbar from "./common/Navbar";
 import { ThemeProvider } from "@mui/material/styles";
 import Theme from "./common/Theme";
 import Profile from './routes/Profile';
+import AlbumsIdPhotos from './routes/AlbumsIdPhotos';
 import NotFound from "./routes/NotFound";
 
 export const App = () => {
@@ -29,6 +30,7 @@ export const App = () => {
               <Route path="/Albums" element={<Albums />}></Route>
               <Route path="/Users" element={<Users />}></Route>
               <Route path="/user/:id" element={<Profile />}></Route>
+              <Route path="/albums/:id" element={<AlbumsIdPhotos />}></Route>
               <Route path="*" element={<NotFound />} />
               
             </Routes>

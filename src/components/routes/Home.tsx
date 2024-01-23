@@ -2,7 +2,6 @@ import Box from "@mui/material/Box";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import { Typography } from "@mui/material";
-import { NONAME } from "dns";
 
 // Define an interface for the item data
 interface ItemData {
@@ -68,6 +67,8 @@ export default function Home() {
     display: { sm: "block", md: "flex" },
     justifyContent: "center",
     alignItems: "center",
+    textAlign: "center",
+    wordWrap: "break-word",
   }}>
       {/* Typography component for the header */}
       <Typography variant="h4" style={{ wordBreak: "normal" }}>
