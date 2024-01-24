@@ -1,6 +1,3 @@
-.madeby{
-    display: none;
-}
 .profile-cards{
     display: grid;
     grid-template-columns: 40% 40%;
@@ -9,6 +6,10 @@
     justify-content: center;
     margin: auto;
   }
+
+  .profile-cards .madeby{
+    display: none;
+}
   @media (max-width: 900px) {
     .profile-cards {
       grid-template-columns: auto;

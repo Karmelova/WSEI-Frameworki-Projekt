@@ -1,4 +1,5 @@
 import { Album } from "../albums/requests";
+import { Photo } from "../photos/requests";
 import { Post } from "../posts/requests";
 
 export interface User {
@@ -58,5 +59,13 @@ export interface User {
       `https://jsonplaceholder.typicode.com/users/${userId}/posts`
     );
     const data: Post[] = await respone.json();
+    return data;
+  }
+
+  export async function getUserPhotos(userId: string) {
+    const respone = await fetch(
+      `https://jsonplaceholder.typicode.com/users/${userId}/photos`
+    );
+    const data: Photo[] = await respone.json();
     return data;
   }
