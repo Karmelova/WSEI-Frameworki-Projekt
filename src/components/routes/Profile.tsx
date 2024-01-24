@@ -223,7 +223,7 @@ export default function Profile() {
                       );
                     else
                       return (
-                        <span>This user have not added any album yet</span>
+                        <span>This user have not added any albums yet</span>
                       );
                   })}
                 </div>
