@@ -11,7 +11,6 @@ export async function getPosts() {
   const data: Post[] = await respone.json();
   const posts = data.map((post) => ({
     ...post,
-    url: `https://picsum.photos/id/${post.id + 25}/600/200`,
   })); //destrukcja
   return posts;
 }
@@ -23,7 +22,6 @@ export async function getPost(postId: number) {
   const data: Post = await respone.json();
   const post = {
     ...data,
-    url: `https://picsum.photos/id/${data.id + 20}/600/200`,
   }; //destrukcja
   return post;
 }

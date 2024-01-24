@@ -1,10 +1,11 @@
-import * as React from "react";
+import React from "react";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import { Link, Outlet, useParams } from "react-router-dom";
 import { useGetUser } from "../../api/users/useGetUser";
 import { Button, CircularProgress, Grid } from "@mui/material";
 import Box from "@mui/material/Box";
+import { Card } from "../common/Card";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
@@ -14,6 +15,8 @@ import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
 import PhotoAlbumIcon from "@mui/icons-material/PhotoAlbum";
 import PhotoLibraryIcon from "@mui/icons-material/PhotoLibrary";
 import ArticleIcon from "@mui/icons-material/Article";
+import { useGetUserAlbums } from "../../api/users/useGetUserAlbums";
+import "./Profile.css";
 
 function stringAvatar(name: string) {
   return {
@@ -65,6 +68,7 @@ export default function Profile() {
   };
   const { id } = useParams();
   const user = useGetUser(id || "");
+  const albums = useGetUserAlbums(id || "");
 
   if (!user) {
     return <CircularProgress color="secondary" />;
@@ -90,7 +94,6 @@ export default function Profile() {
           md={3}
           sx={{
             display: "flex",
-            justifyContent: "center",
             flexDirection: "column",
           }}
         >
@@ -181,7 +184,21 @@ export default function Profile() {
               Item One
             </TabPanel>
             <TabPanel value={value} index={1}>
-              Item Two
+              {albums && (
+                <div className="profile-cards">
+                  {albums.map((album) => {
+                    return (
+                      <Card
+                        title={album.title}
+                        albumId={album.id}
+                        userId={album.userId}
+                        name={user?.name}
+                        userName={user?.username}
+                      ></Card>
+                    );
+                  })}
+                </div>
+              )}
             </TabPanel>
             <TabPanel value={value} index={2}>
               Item Three

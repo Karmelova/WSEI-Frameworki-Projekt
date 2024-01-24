@@ -1,3 +1,5 @@
+import { Album } from "../albums/requests";
+
 export interface User {
     id: number;
     name: string;
@@ -42,3 +44,10 @@ export interface User {
     return user;
   }
   
+  export async function getUserAlbums(userId: string) {
+    const respone = await fetch(
+      `https://jsonplaceholder.typicode.com/users/${userId}/albums`
+    );
+    const data: Album[] = await respone.json();
+    return data;
+  }

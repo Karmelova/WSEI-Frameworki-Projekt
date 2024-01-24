@@ -29,6 +29,7 @@ interface Props {
   website?: string;
   companyName?: string;
   email?: string;
+  key?:number;
 }
 
 function stringAvatar(name: string) {
@@ -64,9 +65,9 @@ export function Card({
             title={title}
           />
         </Link>
-        <CardContent sx={{ paddingTop: 0 }}>
+        <CardContent sx={{ paddingTop: 0 }} className="madeby">
           <Link className="card-link" to={`/user/${userId}`}>
-            <Typography variant="caption" color="text.secondary">
+            <Typography variant="caption" color="text.secondary" >
               made by: @{userName}
             </Typography>
           </Link>

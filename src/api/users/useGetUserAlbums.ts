@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
-import { User, getUser } from "./requests";
+import { User, getUserAlbums} from "./requests";
+import { Album } from "../albums/requests";
 
-export function useGetUserAlbums(userId: number) {
-  const [user, setUser] = useState<User>();
+export function useGetUserAlbums(userId: string) {
+  const [albums, setUserAlbums] = useState<Album[]>();
 
   useEffect(()=>{
-    getUser(userId.toString()).then((data) => setUser(data));
+    getUserAlbums(userId).then((data) => setUserAlbums(data));
   }, [userId]);
 
-  return user;
+  return albums;
 }

@@ -1,0 +1,16 @@
+.madeby{
+    display: none;
+}
+.profile-cards{
+    display: grid;
+    grid-template-columns: 40% 40%;
+    gap: 2em;
+    max-width: 800px;
+    justify-content: center;
+    margin: auto;
+  }
+  @media (max-width: 900px) {
+    .profile-cards {
+      grid-template-columns: auto;
+    }
+  }
