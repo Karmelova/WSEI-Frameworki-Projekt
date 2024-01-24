@@ -11,7 +11,6 @@ import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import BusinessIcon from "@mui/icons-material/Business";
 import LanguageIcon from "@mui/icons-material/Language";
 import Typography from "@mui/material/Typography";
-import PersonIcon from "@mui/icons-material/Person";
 import PhotoAlbumIcon from '@mui/icons-material/PhotoAlbum';
 import { Link, useNavigate } from "react-router-dom";
 import "./Card.css";
@@ -82,8 +81,7 @@ export function Card({
         <Link className="card-link" to={`/user/${userId}`}>
           <CardHeader
             avatar={
-              <Avatar aria-label="recipe">
-                <PersonIcon></PersonIcon>
+              <Avatar  {...stringAvatar(name ? name : ("N A"))}aria-label="recipe">
               </Avatar>
             }
             title={name}
