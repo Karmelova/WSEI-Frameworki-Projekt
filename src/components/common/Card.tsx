@@ -12,7 +12,7 @@ import BusinessIcon from "@mui/icons-material/Business";
 import LanguageIcon from "@mui/icons-material/Language";
 import Typography from "@mui/material/Typography";
 import PersonIcon from "@mui/icons-material/Person";
-import PhotoLibraryIcon from "@mui/icons-material/PhotoLibrary";
+import PhotoAlbumIcon from '@mui/icons-material/PhotoAlbum';
 import { Link, useNavigate } from "react-router-dom";
 import "./Card.css";
 
@@ -58,7 +58,7 @@ export function Card({
           <CardHeader
             avatar={
               <Avatar aria-label="recipe">
-                <PhotoLibraryIcon></PhotoLibraryIcon>
+                <PhotoAlbumIcon></PhotoAlbumIcon>
               </Avatar>
             }
             title={title}
