@@ -1,5 +1,7 @@
 import * as React from "react";
+import { ReactSVG } from "react-svg";
 import { styled, alpha } from "@mui/material/styles";
+import { useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -14,10 +16,10 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
-
-import { ReactSVG } from "react-svg";
-
+import { useGetUsers } from "../../api/users/useGetUsers";
+import { useGetPhoto } from "../../api/photos/UserGetPhoto";
 import "./Navbar.css";
+import { useGetAlbumById } from "../../api/albums/useGetAlbumById";
 
 const pages: string[] = ["Posts", "Albums", "Users"];
 const settings: string[] = ["Profile", "Account", "Dashboard", "Logout"];
@@ -66,12 +68,16 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     [theme.breakpoints.up("sm")]: {
       width: "12ch",
       "&:focus": {
-        width: "20ch",
+        width: "100%",
       },
     },
   },
 }));
+
 function Navbar() {
+  const [searchText, setSearchText] = useState("");
+  const [isSearchFocused, setIsSearchFocused] = useState(false);
+
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -88,17 +94,46 @@ function Navbar() {
 
   const handleCloseNavMenu = (page: string) => {
     setAnchorElNav(null);
-    if (pages.includes(page) ) {
+    if (pages.includes(page)) {
       window.location.href = `/${page}`;
     }
-
   };
 
-  const handleCloseUserMenu = (setting: string ) => {
+  const handleCloseUserMenu = (setting: string) => {
     setAnchorElUser(null);
-    if(settings.includes(setting)){
+    if (settings.includes(setting)) {
       window.location.href = `/${setting}`;
     }
+  };
+  const handleOpenSearchResults = (
+    event: React.FocusEvent<HTMLInputElement>
+  ) => {
+    setIsSearchFocused(true);
+  };
+  const handleGetSearchResults = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setSearchText(event.target.value);
+  };
+
+  function SearchResultsHandler() {
+    const userSearch = useGetUsers();
+    const photoSearch = useGetPhoto(searchText);
+    const albumSearch = useGetAlbumById(searchText);
+
+    if (searchText.length == 0) {
+      return <div className="search-results"></div>;
+    } else {
+      return (
+        <div className={`search-results ${isSearchFocused ? "focused" : ""}`}>
+          No results found for {searchText}
+        </div>
+      );
+    }
+  }
+
+  const handleBlurSearch = () => {
+    setIsSearchFocused(false);
   };
 
   return (
@@ -136,7 +171,12 @@ function Navbar() {
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ "aria-label": "search" }}
+              onChange={handleGetSearchResults}
+              onFocus={handleOpenSearchResults}
+              onBlur={handleBlurSearch}
+              
             />
+            <SearchResultsHandler></SearchResultsHandler>
           </Search>
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
@@ -232,7 +272,10 @@ function Navbar() {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting: string) => (
-                <MenuItem key={setting} onClick={() => handleCloseUserMenu(setting)}>
+                <MenuItem
+                  key={setting}
+                  onClick={() => handleCloseUserMenu(setting)}
+                >
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}

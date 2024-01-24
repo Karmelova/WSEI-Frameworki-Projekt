@@ -1,19 +1,39 @@
 @font-face {
-    font-family: 'Olga-Regular';
-    src: url('https://karmelova.github.io/WSEI-Frameworki-Projekt/public/fonts/Olga-Regular/Olga-Regular.ttf.eot') format('truetype'),
-         url('https://karmelova.github.io/WSEI-Frameworki-Projekt/public/fonts/Olga-Regular/Olga-Regular.ttf.woff') format('woff'),
-         url('https://karmelova.github.io/WSEI-Frameworki-Projekt/public/fonts/Olga-Regular/Olga-Regular.ttf.svg') format('svg');
-    font-weight: normal;
-    font-style: normal;
-  }
-  
-  a {
-    font-family: 'Olga-Regular', sans-serif;
-  }
-  .logo{
-    height: 2em;
-    width: 40px;
-    margin-right: 10px;
-    fill: #d62246;
-  }
-  
+  font-family: 'Olga-Regular';
+  src: url('https://karmelova.github.io/WSEI-Frameworki-Projekt/public/fonts/Olga-Regular/Olga-Regular.ttf.eot') format('truetype'),
+    url('https://karmelova.github.io/WSEI-Frameworki-Projekt/public/fonts/Olga-Regular/Olga-Regular.ttf.woff') format('woff'),
+    url('https://karmelova.github.io/WSEI-Frameworki-Projekt/public/fonts/Olga-Regular/Olga-Regular.ttf.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+a {
+  font-family: 'Olga-Regular', sans-serif;
+}
+
+.logo {
+  height: 2em;
+  width: 40px;
+  margin-right: 10px;
+  fill: #d62246;
+}
+.search-results {
+  display: none;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  position: absolute;
+  top: 40px;
+  padding: 8px;
+  color: black;
+  cursor:pointer;
+  overflow: hidden;
+  word-break: break-all;
+  max-height: 400px;
+}
+.search-results.focused {
+  display:block;
+  position: absolute;
+  width: calc(100% - 16px);
+  top: 40px;
+  padding: 8px;
+}
