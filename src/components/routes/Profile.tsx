@@ -16,6 +16,7 @@ import PhotoAlbumIcon from "@mui/icons-material/PhotoAlbum";
 import PhotoLibraryIcon from "@mui/icons-material/PhotoLibrary";
 import ArticleIcon from "@mui/icons-material/Article";
 import { useGetUserAlbums } from "../../api/users/useGetUserAlbums";
+import { useGetUserPosts } from "../../api/users/useGetUserPosts";
 import "./Profile.css";
 
 function stringAvatar(name: string) {
@@ -69,6 +70,7 @@ export default function Profile() {
   const { id } = useParams();
   const user = useGetUser(id || "");
   const albums = useGetUserAlbums(id || "");
+  const posts = useGetUserPosts(id || "");
 
   if (!user) {
     return <CircularProgress color="secondary" />;
@@ -181,12 +183,32 @@ export default function Profile() {
           </Tabs>
           <Box>
             <TabPanel value={value} index={0}>
-              Item One
+            {posts && (
+                <div className="profile-cards">
+                  {posts.map((post) => {
+                    if(posts.length > 0)
+                    return (
+                      <Card
+                      description={post.body}
+                      title={post.title}
+                      key={post.id}
+                      userId={post.userId}
+                      name={user?.name}
+                      userName={user?.username}
+                      ></Card>
+                    );
+                    else return(
+                      <span>This user have not added any album yet</span>
+                    );
+                  })}
+                </div>
+              )}
             </TabPanel>
             <TabPanel value={value} index={1}>
               {albums && (
                 <div className="profile-cards">
                   {albums.map((album) => {
+                    if(albums.length > 0)
                     return (
                       <Card
                         title={album.title}
@@ -196,9 +218,13 @@ export default function Profile() {
                         userName={user?.username}
                       ></Card>
                     );
+                    else return(
+                      <span>This user have not added any album yet</span>
+                    );
                   })}
                 </div>
               )}
+             
             </TabPanel>
             <TabPanel value={value} index={2}>
               Item Three
