@@ -79,17 +79,18 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 function Navbar() {
-  const isUserLoggedIn =
-    localStorage.getItem("userId") &&
-    localStorage.getItem("name") &&
-    localStorage.getItem("email");
+  const isUserLoggedIn = {
+    userId: localStorage.getItem("userId"),
+    name: localStorage.getItem("name"),
+    email: localStorage.getItem("email"),
+  };
   const navigate = useNavigate();
   const handleLogout = () => {
     // Clear localStorage data
     localStorage.removeItem("userId");
     localStorage.removeItem("name");
     localStorage.removeItem("email");
-    console.log("dane usunięto")
+    console.log("dane usunięto");
 
     // Redirect to the login page or any other appropriate page
     navigate("/Login");
@@ -120,12 +121,11 @@ function Navbar() {
 
   const handleCloseUserMenu = (setting: string) => {
     setAnchorElUser(null);
-    if(setting=="Profile"){
+    if (setting == "Profile") {
       window.location.href = `/user/${localStorage.getItem("userId")}`;
-    }
-    else if(setting == "Logout"){
+    } else if (setting == "Logout") {
       handleLogout();
-      window.location.href = `/Login`
+      window.location.href = `/Login`;
     }
   };
   const handleOpenSearchResults = (
@@ -146,15 +146,13 @@ function Navbar() {
     const albumSearch = useGetAlbumById(searchText);
     const matchingAlbum = albumSearch?.id;
     const matchingUsers = userSearch?.filter((user) =>
-        user.name.toLowerCase().startsWith(searchText.toLowerCase())
-      );
-      console.log(matchingUsers);
+      user.name.toLowerCase().startsWith(searchText.toLowerCase())
+    );
+    console.log(matchingUsers);
 
     if (searchText.length == 0) {
       return <div className="search-results"></div>;
-    }
-    else {
-      
+    } else {
       return (
         <div className={`search-results ${isSearchFocused ? "focused" : ""}`}>
           {matchingUsers?.[0] && (
@@ -162,45 +160,47 @@ function Navbar() {
               {matchingUsers?.map((matchingUser) => (
                 <Link to={`/user/${matchingUser.id}`} key={matchingUser.id}>
                   <div className="searchbar-result">
-                    <PersonIcon sx={{marginRight: 1}}></PersonIcon>
+                    <PersonIcon sx={{ marginRight: 1 }}></PersonIcon>
                     {matchingUser.name}
                   </div>
                 </Link>
               ))}
             </div>
           )}
-          {matchingPhoto!=undefined && (
+          {matchingPhoto != undefined && (
             <div className="search-results-result">
               <Link
                 to={`/photo/${matchingPhoto.toString()}`}
                 key={matchingPhoto}
               >
                 <div className="searchbar-result">
-                  <PhotoLibraryIcon sx={{marginRight: 1}}></PhotoLibraryIcon>
+                  <PhotoLibraryIcon sx={{ marginRight: 1 }}></PhotoLibraryIcon>
                   {photoSearch?.title}
                 </div>
               </Link>
             </div>
           )}
-          {matchingAlbum!=undefined && (
+          {matchingAlbum != undefined && (
             <div className="search-results-result">
               <Link
                 to={`/photo/${matchingAlbum.toString()}`}
                 key={matchingAlbum}
               >
                 <div className="searchbar-result">
-                  <PhotoAlbumIcon sx={{marginRight: 1}}></PhotoAlbumIcon>
+                  <PhotoAlbumIcon sx={{ marginRight: 1 }}></PhotoAlbumIcon>
                   {albumSearch?.title}
                 </div>
               </Link>
             </div>
           )}
-          
-          {matchingAlbum==undefined && matchingPhoto==undefined && matchingUsers?.length == 0 &&(
-            <div className="searchbar-result">
-            No results found for {searchText}
-          </div>
-          )}
+
+          {matchingAlbum == undefined &&
+            matchingPhoto == undefined &&
+            matchingUsers?.length == 0 && (
+              <div className="searchbar-result">
+                No results found for {searchText}
+              </div>
+            )}
         </div>
       );
     }
@@ -217,7 +217,11 @@ function Navbar() {
       setIsSearchFocused(false);
     }, 500);
   };
-
+  function stringAvatar(name: string) {
+    return {
+      children: `${name.split(" ")[0][0]}${name.split(" ")[1][0]}`,
+    };
+  }
   return (
     <AppBar position="sticky" color="primary">
       <Container maxWidth="xl">
@@ -331,22 +335,22 @@ function Navbar() {
           ></Typography>
 
           <Box sx={{ flexGrow: 0, flexShrink: 3 }}>
-          {isUserLoggedIn ? (
-          <Tooltip title="Open settings">
-            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-              <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-            </IconButton>
-          </Tooltip>
-        ) : (
-          <Button
-            onClick={() => navigate("/login")}
-            variant="contained"
-            color="secondary"
-            
-          >
-            Login
-          </Button>
-        )}
+            {isUserLoggedIn.email ? (
+              <Tooltip title="Open settings">
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  <Avatar {...stringAvatar(isUserLoggedIn.name ? isUserLoggedIn.name : "N A")}
+                aria-label="recipe" />
+                </IconButton>
+              </Tooltip>
+            ) : (
+              <Button
+                onClick={() => navigate("/login")}
+                variant="contained"
+                color="secondary"
+              >
+                Login
+              </Button>
+            )}
             <Menu
               sx={{ mt: "45px" }}
               id="menu-appbar"
@@ -365,18 +369,18 @@ function Navbar() {
             >
               {settings.map((setting: string) => (
                 <MenuItem
-                key={setting}
-                onClick={() => {
-                  if (setting === "Logout") {
-                    handleLogout();
-                    handleCloseUserMenu(setting);
-                  } else {
-                    handleCloseUserMenu(setting);
-                  }
-                }}
-              >
-                <Typography textAlign="center">{setting}</Typography>
-              </MenuItem>
+                  key={setting}
+                  onClick={() => {
+                    if (setting === "Logout") {
+                      handleLogout();
+                      handleCloseUserMenu(setting);
+                    } else {
+                      handleCloseUserMenu(setting);
+                    }
+                  }}
+                >
+                  <Typography textAlign="center">{setting}</Typography>
+                </MenuItem>
               ))}
             </Menu>
           </Box>
