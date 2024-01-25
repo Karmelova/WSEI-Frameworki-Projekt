@@ -126,14 +126,19 @@ function Navbar() {
     const photoSearch = useGetPhoto(searchText);
     const matchingPhoto = photoSearch?.id;
     const albumSearch = useGetAlbumById(searchText);
+    const matchingAlbum = albumSearch?.id;
 
     
-    if (searchText.length == 0) {
-      return <div className="search-results"></div>;
-    } else {
-      const matchingUsers = userSearch?.filter((user) =>
+    const matchingUsers = userSearch?.filter((user) =>
         user.name.toLowerCase().startsWith(searchText.toLowerCase())
       );
+
+
+    if (searchText.length == 0) {
+      return <div className="search-results"></div>;
+    } 
+    else {
+      
       return (
         <div className={`search-results ${isSearchFocused ? "focused" : ""}`}>
           {matchingUsers?.[0] && (
@@ -141,7 +146,7 @@ function Navbar() {
               {matchingUsers?.map((matchingUser) => (
                 <Link to={`/user/${matchingUser.id}`} key={matchingUser.id}>
                   <div className="searchbar-result">
-                    <PersonIcon></PersonIcon>
+                    <PersonIcon sx={{marginRight: 1}}></PersonIcon>
                     {matchingUser.name}
                   </div>
                 </Link>
@@ -155,13 +160,25 @@ function Navbar() {
                 key={matchingPhoto}
               >
                 <div className="searchbar-result">
-                  <PhotoLibraryIcon></PhotoLibraryIcon>
+                  <PhotoLibraryIcon sx={{marginRight: 1}}></PhotoLibraryIcon>
                   {photoSearch.title}
                 </div>
               </Link>
             </div>
           )}
-          No results found for {searchText}
+          {matchingAlbum && (
+            <div className="search-results-result">
+              <Link
+                to={`/photo/${matchingAlbum.toString()}`}
+                key={matchingAlbum}
+              >
+                <div className="searchbar-result">
+                  <PhotoAlbumIcon sx={{marginRight: 1}}></PhotoAlbumIcon>
+                  {albumSearch.title}
+                </div>
+              </Link>
+            </div>
+          )}
         </div>
       );
     }
