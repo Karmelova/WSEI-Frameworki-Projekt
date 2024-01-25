@@ -120,12 +120,12 @@ function Navbar() {
 
   const handleCloseUserMenu = (setting: string) => {
     setAnchorElUser(null);
-    if(setting == "Logout"){
+    if(setting=="Profile"){
+      window.location.href = `/user/${localStorage.getItem("userId")}`;
+    }
+    else if(setting == "Logout"){
       handleLogout();
       window.location.href = `/Login`
-    }
-    else if (settings.includes(setting)) {
-      window.location.href = `/${setting}`;
     }
   };
   const handleOpenSearchResults = (
