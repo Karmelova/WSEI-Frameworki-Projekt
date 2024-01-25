@@ -55,19 +55,19 @@ export function Card({
   postId,
 }: Props) {
   const navigate = useNavigate();
+  const loggedInUserId = localStorage.getItem("userId");
+  const isCurrentUser = () => {
+    return loggedInUserId === userId?.toString();
+  };
   if (userId == undefined && description) {
     return (
       <MyCard sx={{ boxShadow: 22 }}>
         <CardContent>
-        <Typography variant="subtitle1" sx={{fontWeight: "bold"}}>
+          <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>
             {email}:
           </Typography>
-          <Typography variant="subtitle2" >
-            {title}
-          </Typography>
-          <Typography variant="caption">
-            {description}
-          </Typography>
+          <Typography variant="subtitle2">{title}</Typography>
+          <Typography variant="caption">{description}</Typography>
         </CardContent>
       </MyCard>
     );
@@ -92,7 +92,16 @@ export function Card({
             </Typography>
           </Link>
         </CardContent>
-        <CardActions>{children}</CardActions>
+        <CardActions>
+          {isCurrentUser() && (
+            <Button
+              variant="outlined"
+              size="small"
+            >
+              Delete
+            </Button>
+          )}
+        </CardActions>
       </MyCard>
     );
   }
@@ -193,7 +202,7 @@ export function Card({
             </Typography>
           )}
         </CardContent>
-        <CardActions sx={{ height: 30 }}>
+        <CardActions sx={{ height: 30, display: "flex", justifyContent: "space-between"}}>
           {postId != undefined && (
             <Button
               size="small"
@@ -202,6 +211,14 @@ export function Card({
               color="secondary"
             >
               Comments
+            </Button>
+          )}
+          {isCurrentUser() && (
+            <Button
+              variant="outlined"
+              size="small"
+            >
+              Delete
             </Button>
           )}
         </CardActions>

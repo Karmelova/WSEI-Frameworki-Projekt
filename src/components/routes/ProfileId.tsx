@@ -30,6 +30,7 @@ function stringAvatar(name: string) {
     textAlign: "center",
   };
 }
+
 interface TabPanelProps {
   children?: React.ReactNode;
   index: number;
