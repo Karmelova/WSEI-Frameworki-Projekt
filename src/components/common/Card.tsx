@@ -11,9 +11,10 @@ import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import BusinessIcon from "@mui/icons-material/Business";
 import LanguageIcon from "@mui/icons-material/Language";
 import Typography from "@mui/material/Typography";
-import PhotoAlbumIcon from '@mui/icons-material/PhotoAlbum';
+import PhotoAlbumIcon from "@mui/icons-material/PhotoAlbum";
 import { Link, useNavigate } from "react-router-dom";
 import "./Card.css";
+import { Button } from "@mui/material";
 
 interface Props {
   title?: string;
@@ -28,12 +29,13 @@ interface Props {
   website?: string;
   companyName?: string;
   email?: string;
-  key?:number;
+  key?: number;
+  postId?: number;
 }
 
 function stringAvatar(name: string) {
   return {
-    children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
+    children: `${name.split(" ")[0][0]}${name.split(" ")[1][0]}`,
   };
 }
 
@@ -49,8 +51,27 @@ export function Card({
   email,
   companyName,
   website,
+  key,
+  postId,
 }: Props) {
   const navigate = useNavigate();
+  if (userId == undefined && description) {
+    return (
+      <MyCard sx={{ boxShadow: 22 }}>
+        <CardContent>
+        <Typography variant="subtitle1" sx={{fontWeight: "bold"}}>
+            {email}:
+          </Typography>
+          <Typography variant="subtitle2" >
+            {title}
+          </Typography>
+          <Typography variant="caption">
+            {description}
+          </Typography>
+        </CardContent>
+      </MyCard>
+    );
+  }
   if (description == undefined && !email) {
     return (
       <MyCard sx={{ boxShadow: 22 }}>
@@ -66,7 +87,7 @@ export function Card({
         </Link>
         <CardContent sx={{ paddingTop: 0 }} className="madeby">
           <Link className="card-link" to={`/user/${userId}`}>
-            <Typography variant="caption" color="text.secondary" >
+            <Typography variant="caption" color="text.secondary">
               made by: @{userName}
             </Typography>
           </Link>
@@ -81,8 +102,10 @@ export function Card({
         <Link className="card-link" to={`/user/${userId}`}>
           <CardHeader
             avatar={
-              <Avatar  {...stringAvatar(name ? name : ("N A"))}aria-label="recipe">
-              </Avatar>
+              <Avatar
+                {...stringAvatar(name ? name : "N A")}
+                aria-label="recipe"
+              ></Avatar>
             }
             title={name}
             subheader={"@" + userName}
@@ -136,12 +159,14 @@ export function Card({
     );
   } else
     return (
-      <MyCard sx={{ boxShadow: 22 }}>
+      <MyCard sx={{ boxShadow: 22, display: "flex", flexDirection: "column" }}>
         <Link className="card-link" to={`/user/${userId}`}>
           <CardHeader
             avatar={
-              <Avatar {...stringAvatar(name ? name : ("N A"))} aria-label="recipe">
-              </Avatar>
+              <Avatar
+                {...stringAvatar(name ? name : "N A")}
+                aria-label="recipe"
+              ></Avatar>
             }
             title={name}
             subheader={"@" + userName}
@@ -158,7 +183,7 @@ export function Card({
           </a>
         )}
         {/* jesli image to wykonaj to co po && */}
-        <CardContent>
+        <CardContent sx={{ alignItems: "strech", flexGrow: 1 }}>
           <Typography gutterBottom variant="h5" component="div">
             {title}
           </Typography>
@@ -168,7 +193,18 @@ export function Card({
             </Typography>
           )}
         </CardContent>
-        <CardActions>{children}</CardActions>
+        <CardActions sx={{ height: 30 }}>
+          {postId != undefined && (
+            <Button
+              size="small"
+              component={Link}
+              to={`/posts/${postId}`}
+              color="secondary"
+            >
+              Comments
+            </Button>
+          )}
+        </CardActions>
       </MyCard>
     );
 }

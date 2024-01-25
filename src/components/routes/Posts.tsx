@@ -38,6 +38,7 @@ export default function Posts() {
             userId={post.userId}
             name={user?.name}
             userName={user?.username}
+            postId={post.id}
           ></Card>
         );
       })}
