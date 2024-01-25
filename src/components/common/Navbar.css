@@ -37,3 +37,18 @@ a {
   top: 40px;
   padding: 8px;
 }
+.search-results a{
+  font-family: sans-serif, sans-serif;
+  text-decoration: none;
+  color: black;
+}
+
+.search-results-result{
+  display: flex;
+  flex-direction: column;
+}
+.searchbar-result{
+  display: flex;
+  font-size: 1.5em;
+  align-items: center;
+}

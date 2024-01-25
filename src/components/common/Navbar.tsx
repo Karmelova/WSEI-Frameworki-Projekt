@@ -16,10 +16,12 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
+import PersonIcon from "@mui/icons-material/Person";
 import { useGetUsers } from "../../api/users/useGetUsers";
 import { useGetPhoto } from "../../api/photos/UserGetPhoto";
 import "./Navbar.css";
 import { useGetAlbumById } from "../../api/albums/useGetAlbumById";
+import { Link, useNavigate } from "react-router-dom";
 
 const pages: string[] = ["Posts", "Albums", "Users"];
 const settings: string[] = ["Profile", "Account", "Dashboard", "Logout"];
@@ -75,6 +77,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 function Navbar() {
+  const navigate = useNavigate();
   const [searchText, setSearchText] = useState("");
   const [isSearchFocused, setIsSearchFocused] = useState(false);
 
@@ -118,22 +121,41 @@ function Navbar() {
 
   function SearchResultsHandler() {
     const userSearch = useGetUsers();
+    console.log(userSearch);
     const photoSearch = useGetPhoto(searchText);
     const albumSearch = useGetAlbumById(searchText);
 
     if (searchText.length == 0) {
       return <div className="search-results"></div>;
     } else {
+      const matchingUsers = userSearch?.filter((user) =>
+        user.name.toLowerCase().startsWith(searchText.toLowerCase())
+      );
+      console.log(matchingUsers);
       return (
         <div className={`search-results ${isSearchFocused ? "focused" : ""}`}>
+          {matchingUsers?.[0] && (
+            <div className="search-results-result">
+              {matchingUsers?.map((matchingUser) => (
+                <Link to={`/user/${matchingUser.id}`} key={matchingUser.id}>
+                  <div className="searchbar-result"><PersonIcon></PersonIcon>{matchingUser.name}</div>
+                </Link>
+              ))}
+            </div>
+          )}
           No results found for {searchText}
         </div>
       );
     }
   }
 
-  const handleBlurSearch = () => {
-    setIsSearchFocused(false);
+  const handleBlurSearch = (event: React.FocusEvent<HTMLInputElement>) => {
+    if (!event.relatedTarget || !event.relatedTarget.closest('.search-results')) {
+      setIsSearchFocused(false);
+    }
+    setTimeout(() => {
+      setIsSearchFocused(false);
+    }, 500);
   };
 
   return (
@@ -174,7 +196,6 @@ function Navbar() {
               onChange={handleGetSearchResults}
               onFocus={handleOpenSearchResults}
               onBlur={handleBlurSearch}
-              
             />
             <SearchResultsHandler></SearchResultsHandler>
           </Search>
