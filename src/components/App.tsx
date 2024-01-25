@@ -13,6 +13,7 @@ import Profile from './routes/Profile';
 import AlbumsIdPhotos from './routes/AlbumsIdPhotos';
 import NotFound from "./routes/NotFound";
 import PostById from "./routes/PostById"
+import Login from "./routes/Login"
 
 export const App = () => {
   const ContentMargin = {
@@ -37,6 +38,7 @@ export const App = () => {
               <Route path="/user/:id" element={<Profile />}></Route>
               <Route path="/albums/:id" element={<AlbumsIdPhotos />}></Route>
               <Route path="/posts/:id" element={<PostById />}></Route>
+              <Route path="/Login" element={<Login />}></Route>
               <Route path="*" element={<NotFound />} />
               
             </Routes>
