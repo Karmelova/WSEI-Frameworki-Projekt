@@ -80,6 +80,16 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 function Navbar() {
   const navigate = useNavigate();
+  const handleLogout = () => {
+    // Clear localStorage data
+    localStorage.removeItem("userId");
+    localStorage.removeItem("name");
+    localStorage.removeItem("email");
+    console.log("dane usunięto")
+
+    // Redirect to the login page or any other appropriate page
+    navigate("/Login");
+  };
   const [searchText, setSearchText] = useState("");
   const [isSearchFocused, setIsSearchFocused] = useState(false);
 
@@ -336,11 +346,17 @@ function Navbar() {
             >
               {settings.map((setting: string) => (
                 <MenuItem
-                  key={setting}
-                  onClick={() => handleCloseUserMenu(setting)}
-                >
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
+                key={setting}
+                onClick={() => {
+                  if (setting === "Logout") {
+                    handleLogout();
+                  } else {
+                    handleCloseUserMenu(setting);
+                  }
+                }}
+              >
+                <Typography textAlign="center">{setting}</Typography>
+              </MenuItem>
               ))}
             </Menu>
           </Box>
