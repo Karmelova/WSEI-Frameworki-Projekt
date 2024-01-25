@@ -127,16 +127,14 @@ function Navbar() {
     const matchingPhoto = photoSearch?.id;
     const albumSearch = useGetAlbumById(searchText);
     const matchingAlbum = albumSearch?.id;
-
-    
     const matchingUsers = userSearch?.filter((user) =>
         user.name.toLowerCase().startsWith(searchText.toLowerCase())
       );
-
+      console.log(matchingUsers);
 
     if (searchText.length == 0) {
       return <div className="search-results"></div>;
-    } 
+    }
     else {
       
       return (
@@ -153,7 +151,7 @@ function Navbar() {
               ))}
             </div>
           )}
-          {matchingPhoto && (
+          {matchingPhoto!=undefined && (
             <div className="search-results-result">
               <Link
                 to={`/photo/${matchingPhoto.toString()}`}
@@ -161,12 +159,12 @@ function Navbar() {
               >
                 <div className="searchbar-result">
                   <PhotoLibraryIcon sx={{marginRight: 1}}></PhotoLibraryIcon>
-                  {photoSearch.title}
+                  {photoSearch?.title}
                 </div>
               </Link>
             </div>
           )}
-          {matchingAlbum && (
+          {matchingAlbum!=undefined && (
             <div className="search-results-result">
               <Link
                 to={`/photo/${matchingAlbum.toString()}`}
@@ -174,10 +172,16 @@ function Navbar() {
               >
                 <div className="searchbar-result">
                   <PhotoAlbumIcon sx={{marginRight: 1}}></PhotoAlbumIcon>
-                  {albumSearch.title}
+                  {albumSearch?.title}
                 </div>
               </Link>
             </div>
+          )}
+          
+          {matchingAlbum==undefined && matchingPhoto==undefined && matchingUsers?.length == 0 &&(
+            <div className="searchbar-result">
+            No results found for {searchText}
+          </div>
           )}
         </div>
       );
