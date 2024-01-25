@@ -120,7 +120,11 @@ function Navbar() {
 
   const handleCloseUserMenu = (setting: string) => {
     setAnchorElUser(null);
-    if (settings.includes(setting)) {
+    if(setting == "Logout"){
+      handleLogout();
+      window.location.href = `/Login`
+    }
+    else if (settings.includes(setting)) {
       window.location.href = `/${setting}`;
     }
   };
@@ -365,6 +369,7 @@ function Navbar() {
                 onClick={() => {
                   if (setting === "Logout") {
                     handleLogout();
+                    handleCloseUserMenu(setting);
                   } else {
                     handleCloseUserMenu(setting);
                   }
