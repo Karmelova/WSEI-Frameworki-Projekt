@@ -18,7 +18,7 @@ import ArticleIcon from "@mui/icons-material/Article";
 import { useGetUserAlbums } from "../../api/users/useGetUserAlbums";
 import { useGetUserPosts } from "../../api/users/useGetUserPosts";
 import { useGetUserPhotos } from "../../api/users/useGetUserPhotos";
-import "./Profile.css";
+import "./ProfileId.css";
 
 function stringAvatar(name: string) {
   return {

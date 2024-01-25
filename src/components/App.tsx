@@ -9,7 +9,7 @@ import Users from "./routes/Users";
 import Navbar from "./common/Navbar";
 import { ThemeProvider } from "@mui/material/styles";
 import Theme from "./common/Theme";
-import Profile from './routes/Profile';
+import ProfileId from './routes/ProfileId';
 import AlbumsIdPhotos from './routes/AlbumsIdPhotos';
 import NotFound from "./routes/NotFound";
 import PostById from "./routes/PostById"
@@ -35,7 +35,7 @@ export const App = () => {
               <Route path="/Posts" element={<Posts />}></Route>
               <Route path="/Albums" element={<Albums />}></Route>
               <Route path="/Users" element={<Users />}></Route>
-              <Route path="/user/:id" element={<Profile />}></Route>
+              <Route path="/user/:id" element={<ProfileId />}></Route>
               <Route path="/albums/:id" element={<AlbumsIdPhotos />}></Route>
               <Route path="/posts/:id" element={<PostById />}></Route>
               <Route path="/Login" element={<Login />}></Route>

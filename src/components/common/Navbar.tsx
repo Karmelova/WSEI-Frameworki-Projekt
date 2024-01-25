@@ -26,7 +26,7 @@ import { useGetAlbumById } from "../../api/albums/useGetAlbumById";
 import { Link, useNavigate } from "react-router-dom";
 
 const pages: string[] = ["Posts", "Albums", "Users"];
-const settings: string[] = ["Profile", "Account", "Dashboard", "Logout"];
+const settings: string[] = ["Profile", "Logout"];
 
 const CustomTypography = styled(Typography)`
   font-family: "Olga-Regular", sans-serif;
@@ -79,6 +79,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 function Navbar() {
+  const isUserLoggedIn =
+    localStorage.getItem("userId") &&
+    localStorage.getItem("name") &&
+    localStorage.getItem("email");
   const navigate = useNavigate();
   const handleLogout = () => {
     // Clear localStorage data
@@ -323,11 +327,22 @@ function Navbar() {
           ></Typography>
 
           <Box sx={{ flexGrow: 0, flexShrink: 3 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
+          {isUserLoggedIn ? (
+          <Tooltip title="Open settings">
+            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+              <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+            </IconButton>
+          </Tooltip>
+        ) : (
+          <Button
+            onClick={() => navigate("/login")}
+            variant="contained"
+            color="secondary"
+            
+          >
+            Login
+          </Button>
+        )}
             <Menu
               sx={{ mt: "45px" }}
               id="menu-appbar"
