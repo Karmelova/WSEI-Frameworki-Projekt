@@ -1,9 +1,9 @@
 import React from "react";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import { Link, Outlet, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useGetUser } from "../../api/users/useGetUser";
-import { Button, CircularProgress, Grid } from "@mui/material";
+import { CircularProgress, Grid } from "@mui/material";
 import Box from "@mui/material/Box";
 import { Card } from "../common/Card";
 import Avatar from "@mui/material/Avatar";

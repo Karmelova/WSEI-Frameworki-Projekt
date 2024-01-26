@@ -10,7 +10,7 @@ import BusinessIcon from "@mui/icons-material/Business";
 import LanguageIcon from "@mui/icons-material/Language";
 import Typography from "@mui/material/Typography";
 import PhotoAlbumIcon from "@mui/icons-material/PhotoAlbum";
-import { Link, useNavigate } from "react-router-dom";
+import { Link} from "react-router-dom";
 import { Button } from "@mui/material";
 import "./Card.css";
 
@@ -52,7 +52,6 @@ export function Card({
   postId,
   photoId,
 }: Props) {
-  const navigate = useNavigate();
   const loggedInUserId = localStorage.getItem("userId");
   const isCurrentUser = () => {
     return loggedInUserId === userId?.toString();
@@ -60,15 +59,15 @@ export function Card({
 
   async function onDelete(id: number, type: string) {
     try {
-      if (type == "post") {
+      if (type === "post") {
         await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
           method: "DELETE",
         });
-      } else if (type == "album") {
+      } else if (type === "album") {
         await fetch(`https://jsonplaceholder.typicode.com/albums/${id}`, {
           method: "DELETE",
         });
-      } else if (type == "photo") {
+      } else if (type === "photo") {
         await fetch(`https://jsonplaceholder.typicode.com/photos/${id}`, {
           method: "DELETE",
         });
@@ -90,7 +89,7 @@ export function Card({
     }
   }
 
-  if (userId == undefined && description) {
+  if (userId === undefined && description) {
     return (
       <MyCard sx={{ boxShadow: 22 }}>
         <CardContent>
@@ -103,7 +102,7 @@ export function Card({
       </MyCard>
     );
   }
-  if (description == undefined && !email) {
+  if (description === undefined && !email) {
     return (
       <MyCard
         sx={{ boxShadow: 22 }}
@@ -140,7 +139,7 @@ export function Card({
       </MyCard>
     );
   }
-  if (description == undefined) {
+  if (description === undefined) {
     return (
       <MyCard sx={{ boxShadow: 22 }}>
         <Link className="card-link" to={`/user/${userId}`}>
@@ -251,7 +250,7 @@ export function Card({
             justifyContent: "space-between",
           }}
         >
-          {postId != undefined && (
+          {postId !== undefined && (
             <Button
               size="small"
               component={Link}

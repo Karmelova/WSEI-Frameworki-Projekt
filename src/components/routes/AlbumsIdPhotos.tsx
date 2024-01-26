@@ -3,8 +3,7 @@ import { useGetPhotosByAlbumId } from "../../api/photos/useGetPhotosByAlbumId";
 import { Card } from "../common/Card";
 import { useGetUser } from "../../api/users/useGetUser";
 import { useGetAlbumById } from "../../api/albums/useGetAlbumById";
-import { Link, useNavigate } from "react-router-dom";
-import { Box, Button, CircularProgress } from "@mui/material";
+import { Box, CircularProgress } from "@mui/material";
 import "./Posts.css";
 
 export default function PhotosByAlbumId() {
@@ -15,7 +14,6 @@ export default function PhotosByAlbumId() {
   const userId = ((album ? album.id : ''))
   const user = useGetUser(String(userId));
 
-  const navigate = useNavigate();
 
   if (!photos) {
     return (
@@ -31,12 +29,6 @@ export default function PhotosByAlbumId() {
     );
   }
 
-  async function onDelete(id: number) {
-    await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
-      method: "DELETE",
-    });
-    navigate("/");
-  }
   if(photos[0]) return (
     <div className="posts">
       {photos.map((photo) => {

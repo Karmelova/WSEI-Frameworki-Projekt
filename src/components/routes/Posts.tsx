@@ -1,15 +1,12 @@
 import { useGetPosts } from "../../api/posts/useGetPosts";
 import { useGetUsers } from "../../api/users/useGetUsers";
 import { Card } from "../common/Card";
-import { Link, useNavigate } from "react-router-dom";
-import { Box, Button, CircularProgress } from "@mui/material";
+import { Box, CircularProgress } from "@mui/material";
 import "./Posts.css";
 
 export default function Posts() {
   const posts = useGetPosts();
   const users = useGetUsers();
-  const navigate = useNavigate();
-
   if (!posts) {
     return (
       <Box
