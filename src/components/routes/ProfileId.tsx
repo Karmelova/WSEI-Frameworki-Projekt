@@ -194,7 +194,6 @@ export default function Profile() {
                         <Card
                           description={post.body}
                           title={post.title}
-                          key={post.id}
                           userId={post.userId}
                           name={user?.name}
                           userName={user?.username}
@@ -239,7 +238,7 @@ export default function Profile() {
                       return (
                         <Card
                           title={photo.title}
-                          key={photo.id}
+                          photoId={photo.id}
                           userId={user.id}
                           name={user.name}
                           userName={user.username}

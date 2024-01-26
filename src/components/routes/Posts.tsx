@@ -12,18 +12,18 @@ export default function Posts() {
 
   if (!posts) {
     return (
-      <Box style={{display:"flex", justifyContent:"center", alignItems: "center"}}>
+      <Box
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
         <CircularProgress color="secondary" />
       </Box>
     );
   }
 
-  async function onDelete(id: number) {
-    await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
-      method: "DELETE",
-    });
-    navigate("/");
-  }
   return (
     <div className="posts">
       {posts.map((post) => {
@@ -34,7 +34,6 @@ export default function Posts() {
           <Card
             description={post.body}
             title={post.title}
-            key={post.id}
             userId={post.userId}
             name={user?.name}
             userName={user?.username}

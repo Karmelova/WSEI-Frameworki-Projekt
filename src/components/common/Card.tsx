@@ -1,20 +1,18 @@
 import * as React from "react";
-import { styled } from "@mui/material/styles";
 import MyCard from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
 import Avatar from "@mui/material/Avatar";
-import IconButton, { IconButtonProps } from "@mui/material/IconButton";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import BusinessIcon from "@mui/icons-material/Business";
 import LanguageIcon from "@mui/icons-material/Language";
 import Typography from "@mui/material/Typography";
 import PhotoAlbumIcon from "@mui/icons-material/PhotoAlbum";
 import { Link, useNavigate } from "react-router-dom";
-import "./Card.css";
 import { Button } from "@mui/material";
+import "./Card.css";
 
 interface Props {
   title?: string;
@@ -29,8 +27,8 @@ interface Props {
   website?: string;
   companyName?: string;
   email?: string;
-  key?: number;
   postId?: number;
+  photoId?: number;
 }
 
 function stringAvatar(name: string) {
@@ -51,14 +49,47 @@ export function Card({
   email,
   companyName,
   website,
-  key,
   postId,
+  photoId,
 }: Props) {
   const navigate = useNavigate();
   const loggedInUserId = localStorage.getItem("userId");
   const isCurrentUser = () => {
     return loggedInUserId === userId?.toString();
   };
+
+  async function onDelete(id: number, type: string) {
+    try {
+      if (type == "post") {
+        await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
+          method: "DELETE",
+        });
+      } else if (type == "album") {
+        await fetch(`https://jsonplaceholder.typicode.com/albums/${id}`, {
+          method: "DELETE",
+        });
+      } else if (type == "photo") {
+        await fetch(`https://jsonplaceholder.typicode.com/photos/${id}`, {
+          method: "DELETE",
+        });
+      }
+      const postElement = document.getElementById(`post${id}`);
+      const albumElement = document.getElementById(`album${id}`);
+      const photoElement = document.getElementById(`photo${id}`);
+      if (postElement) {
+        postElement.classList.add("hidden");
+      }
+      if (albumElement) {
+        albumElement.classList.add("hidden");
+      }
+      if (photoElement) {
+        photoElement.classList.add("hidden");
+      }
+    } catch (error) {
+      console.error("Error deleting post:", error);
+    }
+  }
+
   if (userId == undefined && description) {
     return (
       <MyCard sx={{ boxShadow: 22 }}>
@@ -74,7 +105,10 @@ export function Card({
   }
   if (description == undefined && !email) {
     return (
-      <MyCard sx={{ boxShadow: 22 }}>
+      <MyCard
+        sx={{ boxShadow: 22 }}
+        id={`album${albumId !== undefined ? albumId : "undefined"}`}
+      >
         <Link className="card-link" to={`/albums/${albumId}`}>
           <CardHeader
             avatar={
@@ -97,6 +131,7 @@ export function Card({
             <Button
               variant="outlined"
               size="small"
+              onClick={() => onDelete(Number(albumId), "album")}
             >
               Delete
             </Button>
@@ -168,7 +203,14 @@ export function Card({
     );
   } else
     return (
-      <MyCard sx={{ boxShadow: 22, display: "flex", flexDirection: "column" }}>
+      <MyCard
+        sx={{ boxShadow: 22, display: "flex", flexDirection: "column" }}
+        id={
+          postId !== undefined
+            ? String("post" + postId)
+            : String("photo" + photoId)
+        }
+      >
         <Link className="card-link" to={`/user/${userId}`}>
           <CardHeader
             avatar={
@@ -202,7 +244,13 @@ export function Card({
             </Typography>
           )}
         </CardContent>
-        <CardActions sx={{ height: 30, display: "flex", justifyContent: "space-between"}}>
+        <CardActions
+          sx={{
+            height: 30,
+            display: "flex",
+            justifyContent: "space-between",
+          }}
+        >
           {postId != undefined && (
             <Button
               size="small"
@@ -217,6 +265,12 @@ export function Card({
             <Button
               variant="outlined"
               size="small"
+              onClick={() =>
+                onDelete(
+                  photoId ? Number(photoId) : Number(postId),
+                  photoId ? "photo" : "post"
+                )
+              }
             >
               Delete
             </Button>

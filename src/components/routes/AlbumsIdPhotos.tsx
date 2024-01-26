@@ -43,12 +43,12 @@ export default function PhotosByAlbumId() {
         return (
           <Card
             title={photo.title}
-            key={photo.id}
             userId={album?.userId}
             name={user?.name}
             userName={user?.username}
             description=""
             image={photo.url}
+            photoId={photo.id}
           ></Card>
         );
       })}
